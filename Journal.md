@@ -21,3 +21,14 @@ Absätze in html erstellen <p>...
 HTML-Grundgerüst in VSC erstellen: "html:5"
 HTML-Grundgerüst mit den öffenden und schließenden Tags verstehen.
 Schließende Tags haben einen führenden "/"
+
+## 19.11.2021
+Kommentar in html einfügen <!----> Kommentare werden vom Browser nicht interpretiert
+Repository mit gitHub synchronisieren in einem mehrschrittigen Prozess:  
+   1. Datei -> Autospeichern einschalten bzw. auf Speichern klicken
+   2. in VSC auf das Git-Symbol in der Leiste ganz links klicken. Anzahl der anstehenden Änderungen werden in einem blauen Kreis angezeigt.
+   3. Eine Nachricht zu den vorgenommenen Änderungen des Quelltextes eintippen. Dann "Commit"-Hacken klicken.
+   4. Push und Pull auslösen, indem auf das Rädchen bzw. auf die Wolke ganz unten geklickt wird.
+
+Username eingegeben -> "git confing --global user.name "..." "
+E-Mail eingegeben -> " git confing --global user.email "..." "
