@@ -32,3 +32,22 @@ Repository mit gitHub synchronisieren in einem mehrschrittigen Prozess:
 
 Username eingegeben -> "git confing --global user.name "..." "
 E-Mail eingegeben -> " git confing --global user.email "..." "
+
+## 26.11 2021
+
+## 30.11.2021
+* Am Anfang der Stunde wird der eigene werb-Server im Terminal gestartet. Der Befehl wird mit der Pfeiltaste nach oben angezeigt und ausgeführt.
+* Im Browser wird der Inhalt über die Adresse ```localhost:3000``` aufgerufen.
+* der ```localhost``` ist der eigene Rechner 
+* Mit dem Befehl ```ipconfig``` (bei Apple Ifconfig) wird die eigene IP-adresse angezeigt. Die eigene IP-Adresse ist im Netzwerk eindeutig.
+
+## 03.12.2021
+* Schriftart ändern mit CSS
+* HTML-Grundgerüst erstellen
+* Button erstellen
+* style einfügen über styles.css-Datei
+* Geschweifte Klammer mit ALTGr+7 erstellen
+
+## 07.12.21
+* Schriftfarbe in der styles.css angepasst
+* styles.css in public-Ordner verschoben
