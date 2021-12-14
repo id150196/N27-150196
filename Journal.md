@@ -51,3 +51,17 @@ E-Mail eingegeben -> " git confing --global user.email "..." "
 ## 07.12.21
 * Schriftfarbe in der styles.css angepasst
 * styles.css in public-Ordner verschoben
+
+## 14.01.22
+* HTML
+* CSS 
+* Windowstaste + Pfeiltaste 
+* Alt-Taste + Tab-Taste
+* F5 Seite neuladen 
+
+## 14.12
+* Bild einfügen
+* unterschied zwischen PNG und JPG verstehen
+* Alt-Tag beim Bild verstehen 
+Hyperlink einbauen mit <a href..></a>
+* Target beim Hyperelink verstehen. _blank öffnet im neuen Tab

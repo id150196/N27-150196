@@ -1,6 +1,13 @@
 body {
+ 
     font-family: monospace;
-    color: cornflowerblue;
     font-size:x-large
     
 }
+button{
+ background-color: rgb(220, 190, 235);
+ font-weight: bold;
+ font-style: italic 
+}
+
+
