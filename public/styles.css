@@ -1,5 +1,6 @@
-body {
- 
+body{
+    background-image: url("Hintergrund.jpg");
+    background-repeat: no-repeat;
     font-family: monospace;
     font-size:x-large
     
