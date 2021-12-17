@@ -10,5 +10,30 @@ button{
  font-weight: bold;
  font-style: italic 
 }
-
-
+    li{
+    list-style-type: "♥";
+    padding-left: .5em;
+  }
+  
+  ::marker {
+    color: rgb(234, 0, 255);
+    content: "♥";
+    font-size: 1.5em;
+  }
+  div{
+      background-color: lavender;
+      border: 3px outset rgb(170, 99, 211);
+  }
+  
+  ul {
+    background: #e0ccb2;
+    padding: 15px;
+  }
+  ol {
+    background: #e0ccb2;
+    padding: 15px;
+  }
+ li {
+    background: #f3e8c2;
+    margin: 5px;
+  }
