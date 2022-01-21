@@ -13,3 +13,11 @@ app.get('/',(req, res, next) => {
     res.render('index.ejs', {})          
 })
 
+// Wenn die login-Seite im Browser aufgerufen wird, ...
+// ... dann wird die login.ejs vom Server gerendert an den
+    // Browser zurückgegeben:   
+app.get('/login',(req, res, next) => {      
+        
+    res.render('login.ejs', {})          
+})
+

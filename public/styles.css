@@ -1,39 +1,90 @@
-body{
-    background-image: url("Hintergrund.jpg");
-    background-repeat: no-repeat;
-    font-family: monospace;
-    font-size:x-large
-    
-}
-button{
- background-color: rgb(220, 190, 235);
- font-weight: bold;
- font-style: italic 
-}
-    li{
-    list-style-type: "♥";
-    padding-left: .5em;
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 6vw;  
   }
   
-  ::marker {
-    color: rgb(234, 0, 255);
-    content: "♥";
-    font-size: 1.5em;
-  }
-  div{
-      background-color: lavender;
-      border: 3px outset rgb(170, 99, 211);
+  button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 6vw;  
   }
   
-  ul {
-    background: #e0ccb2;
-    padding: 15px;
+  .login {
+    width: 100%;
+    background-color: rgb(119, 107, 107);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 6vw;  
   }
-  ol {
-    background: #e0ccb2;
-    padding: 15px;
+  
+  label {    
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 6vw;  
+    color: green;
   }
- li {
-    background: #f3e8c2;
-    margin: 5px;
+  
+  div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 70%;
+    margin: 0 auto
   }
+  
+  h1 {
+    margin: 0 -601.5rem;  
+    padding: .25rem 1.5rem;
+    background:#4CAF50;  
+    border-left: 600rem solid rgb(13, 83, 72);
+    border-right: 600rem solid rgb(13, 83, 72);
+    color: white;
+    font-size: 8vw; 
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  h2 {  
+    color: #4CAF50;  
+    font-size: 6vw; 
+    font-family: Arial, Helvetica, sans-serif;
+    text-align:center;
+  }
+  
+  nav {  
+    font-family: Arial, Helvetica, sans-serif;    
+      background-color: rgb(119, 107, 107);        
+      font-size: 4vw;    
+      text-align:center;  
+      color: white;
+      margin: 0 -601.5rem;  
+      padding: .25rem 1.5rem;
+      border-left: 600rem solid rgb(13, 83, 72);
+      border-right: 600rem solid rgb(13, 83, 72);
+  }
+   
+  a {  
+    color: white;  
+    text-decoration: none;
+   }
+  
+   p {
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3vw; 
+   }
+

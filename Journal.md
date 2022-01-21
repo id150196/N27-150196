@@ -52,12 +52,6 @@ E-Mail eingegeben -> " git confing --global user.email "..." "
 * Schriftfarbe in der styles.css angepasst
 * styles.css in public-Ordner verschoben
 
-## 14.01.22
-* HTML
-* CSS 
-* Windowstaste + Pfeiltaste 
-* Alt-Taste + Tab-Taste
-* F5 Seite neuladen 
 
 ## 14.12
 * Bild einfügen
@@ -65,3 +59,40 @@ E-Mail eingegeben -> " git confing --global user.email "..." "
 * Alt-Tag beim Bild verstehen 
 Hyperlink einbauen mit <a href..></a>
 * Target beim Hyperelink verstehen. _blank öffnet im neuen Tab
+
+## 17.12.21
+* Tabelle einfügen
+* Zeilen <tr> und Zellen <td> (=Tabelle-data)
+in HTML-Tabellen verstehenm
+* Listen (geordnet <ol> und ungeordnet <ul>) verstehen 
+* In ungeordneten Listen den Aufzählungspunkt durch Bild ersetzen 
+* Horizontale Linie einbauen <hr>
+
+## 21.12.21
+* Zeilenumbruch <br> einbauen
+
+## 11.01.2022
+* https://wiki.selfhtml.org/
+* https://wiki.selfhtml.org/
+
+## 14.01.22
+* Ein lauffähiges Projekt mit einer leeren index.ejs wird ausgeteilt. Es ist keine styles css vorhanden.
+* Die styles.css muss angelegt und richtig in der index.ejs eingebaut werden.
+* Teil 1: HTML und CSS nach Vorgabe einbauen. Dazu müssen die HTML-Konstrukte
+* CSS 
+* Windowstaste + Pfeiltaste 
+* Alt-Taste + Tab-Taste
+* F5 Seite neuladen 
+
+## 18.01.2022
+* Weitere Seite erstellen, indem 
+1. die index.ejs kopiert und unbennant wurde
+2. Hyperlink erstellt wurde
+
+## 21.01.2022
+1.  Login-Seite erstellt 
+2.  Formular aus W3Schools kopiert und eingebaut
+3. Type der Inputs entsprechend von Text auf Password bzw. Number geändert 
+4. Verlinkung von login nach index und zurück erstellen 
+5. die ID der Inouts setzen 
+
