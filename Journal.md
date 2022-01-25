@@ -96,3 +96,9 @@ in HTML-Tabellen verstehenm
 4. Verlinkung von login nach index und zurück erstellen 
 5. die ID der Inouts setzen 
 
+## 25.01.22
++ Unterschied zwischen POST und GET verstehen. GET transportiert die Daten vom Browser zum Server über die Adresszeile. POST transportiert die Daten "hinter den Kulissen" 
+* Mit ALT+Tab zwischen Browser und VSC hin- und herspringen. #
+* Unterschied zwischen app.get(...) und app.post(...)
+verstehen. app.get("login") wird ausgeführt, wenn die 
+Login-BSeite im Browser angefordert wird. app.post("ligin") wird ausgeführt, wenn der Button auf der Login-Seite gedrückt wird. 
