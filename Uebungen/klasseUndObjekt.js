@@ -102,6 +102,31 @@ if(zeugnisMax.Fehlstunden > zeugnisPit.Fehlstunden){
 // c) Instanzieren Sie ein Objekt der Klasse
 // d) Initialisieren Sie das Objekt mit Eigenschaftswerten
 
+// zu a) Das Sortiment ist das Objekt der realen Welt
+
+// zu b)
+class Sortiment{
+    constructor (){
+        this.Snacks
+        this.Getränke
+        this.Zigaretten
+        this.Zeitschriften
+    }
+}
+
+// zu c) 
+let sortimentAnzahl = new Sortiment ()
+
+// zu d)
+sortimentAnzahl.Snacks = 250
+sortimentAnzahl.Getränke = 150
+
+if( sortimentAnzahl.Snacks > sortimentAnzahl.Getränke){
+    console.log ("Der Bestand an Snacks ist größer als der Bestand an Getränke")
+     }else{
+         console.log ( "Der Bestand an Snacks ist nicht größer als der Bestand an Getränke ")
+}
+
 
 
 
@@ -114,8 +139,25 @@ if(zeugnisMax.Fehlstunden > zeugnisPit.Fehlstunden){
 // c) Instanzieren Sie ein Objekt der Klasse
 // d) Initialisieren Sie das Objekt mit Eigenschaftswerten
 
+// zu a) Die Stände sind die Objekte der realen Welt
 
+// zu b) 
+ class Stand{
+     constructor(){
+         this.Größe
+     }
+ }
 
+ // zu c)
+ let stand1 = new Stand ()
+ let stand2 = new Stand ()
 
+ // zu d) 
+stand1.Größe = "5m"
+stand2.Größe = "3m"
 
-
+if(stand1 < stand2){
+    console.log (" Der erste Stand ist kleiner als zweiter Stand")
+    }else{
+        console.log (" Der erste Stand ist nicht kleiner als zweiter Stand")
+}
