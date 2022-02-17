@@ -102,31 +102,39 @@ if(zeugnisMax.Fehlstunden > zeugnisPit.Fehlstunden){
 // c) Instanzieren Sie ein Objekt der Klasse
 // d) Initialisieren Sie das Objekt mit Eigenschaftswerten
 
-// zu a) Das Sortiment ist das Objekt der realen Welt
+// zu a) Die Objekte der realen Welt sind die Produkte
 
 // zu b)
-class Sortiment{
+class Produkt{
     constructor (){
-        this.Snacks
-        this.Getränke
-        this.Zigaretten
-        this.Zeitschriften
+        this.BruttoPreis
+        this.Bezeichnung
+        this.MwStSatz
+        this.Barcode
     }
 }
 
 // zu c) 
-let sortimentAnzahl = new Sortiment ()
+// Deklaration und Instanziierung
+let produkt1 = new Produkt ()
 
 // zu d)
-sortimentAnzahl.Snacks = 250
-sortimentAnzahl.Getränke = 150
+produkt1.Bezeichnung = "Kaugummi"
+produkt1.Barcode = 5901234123457
+produkt1.BruttoPreis = 1.19 // Im Quellcode steht anstelle des Kommas ein Punkt
+produkt1.MwStSatz = 19 // Prozent
 
-if( sortimentAnzahl.Snacks > sortimentAnzahl.Getränke){
-    console.log ("Der Bestand an Snacks ist größer als der Bestand an Getränke")
-     }else{
-         console.log ( "Der Bestand an Snacks ist nicht größer als der Bestand an Getränke ")
+console.log ("das Produkt " + produkt1.Bezeichnung + " hat den Bruttopreis " + produkt1.BruttoPreis)
+
+produkt1.Nettopreis= produkt1.BruttoPreis / (100 + produkt1.MwStSatz) * 100
+
+console.log ("Nettopreis: "+ produkt1.Nettopreis )
+
+if(produkt1.BruttoPreis > 1){
+    console.log ( "Achtung! Preis von " + produkt1.Bezeichnung + " muss gesenkt werden!" )
+    }else{
+        console.log (" Preis von"  + produkt1.Bezeichnung + " ist ok")
 }
-
 
 
 
@@ -139,12 +147,15 @@ if( sortimentAnzahl.Snacks > sortimentAnzahl.Getränke){
 // c) Instanzieren Sie ein Objekt der Klasse
 // d) Initialisieren Sie das Objekt mit Eigenschaftswerten
 
-// zu a) Die Stände sind die Objekte der realen Welt
+// zu a) Der Stand sind das Objekte der realen Welt
 
 // zu b) 
  class Stand{
      constructor(){
          this.Größe
+         this.Dekoration
+         this.Personalanzahl
+
      }
  }
 
@@ -153,11 +164,11 @@ if( sortimentAnzahl.Snacks > sortimentAnzahl.Getränke){
  let stand2 = new Stand ()
 
  // zu d) 
-stand1.Größe = "5m"
-stand2.Größe = "3m"
+stand1.Personalanzahl = 5
+stand2.Personalanzahl = 8
 
 if(stand1 < stand2){
-    console.log (" Der erste Stand ist kleiner als zweiter Stand")
+    console.log (" Die Anzahl von Personal am ersten Stand ist kleiner als am zweiten Stand")
     }else{
-        console.log (" Der erste Stand ist nicht kleiner als zweiter Stand")
+        console.log (" Die Anzahl von Personal am zweiten Stand ist kleiner als am ersten Stand")
 }
