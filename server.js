@@ -115,7 +115,6 @@ meineApp.post('/login',(browserAnfrage, serverAntwort, next) => {
 
 
 // Wenn die login-Seite im Browser aufgerufen wird, ...
-
 meineApp.get('/login',(browserAnfrage, serverAntwort, next) => {              
 
     // ... dann wird die login.ejs vom Server gerendert an den
@@ -130,6 +129,7 @@ meineApp.get('/login',(browserAnfrage, serverAntwort, next) => {
     })          
 })
 
+
 // Die meineApp.post('login') wird ausgeführt, sobald der Button
 // auf dem Login-Formular gedrückt wird.
 
@@ -137,5 +137,12 @@ meineApp.get('/about',(browserAnfrage, serverAntwort, next) => {
     serverAntwort.render('about.ejs', {})          
 })
 
+
+meineApp.get('/about',(browserAnfrage, serverAntwort, next) => {              
+
+    serverAntwort.render('about.ejs', {
+        
+    })          
+})
 // require('./Uebungen/ifUndElse.js')
 // require('./Uebungen/klasseUndObjekt.js')
