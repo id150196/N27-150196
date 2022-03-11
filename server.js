@@ -14,6 +14,7 @@ class Kunde{
         this.Kontostand
         this.Geburtsdatum
         this.Mail
+        this.Telefonnummer
     }
 }
 
@@ -30,7 +31,8 @@ kunde.Nachname = "Eyre"
 kunde.Vorname = "Jane"
 kunde.Geburtsdatum = "16.10.2002"
 kunde.MAil = "eyre@web.de"
-kunde.Kennwort = "123"
+kunde.Kennwort= "123"
+kunde.Telefonnummer = "0177896754306"
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -138,11 +140,20 @@ meineApp.get('/about',(browserAnfrage, serverAntwort, next) => {
 })
 
 
-meineApp.get('/about',(browserAnfrage, serverAntwort, next) => {              
 
-    serverAntwort.render('about.ejs', {
+    meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {              
+        serverAntwort.render('profile.ejs', {})          
+    }) 
+
+    meineApp.post('/profile',(browserAnfrage, serverAntwort, next) => {             
         
-    })          
+    const Mail = browserAnfrage.body.Mail
+    const Telefonnummer = browserAnfrage.body.Telefonnummer
+    
+    console.log("E-Mailkdes Kunden: " + Mail)
+    console.log("Telefonnummer des Kunden: " + Telefonnummer) 
 })
+
+  
 // require('./Uebungen/ifUndElse.js')
 // require('./Uebungen/klasseUndObjekt.js')
