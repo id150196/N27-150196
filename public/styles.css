@@ -12,10 +12,10 @@
 
 .navigationsleiste {  
   font-family: Arial, Helvetica, sans-serif;    
-  background-color: rgb(119, 107, 107);        
+  background-color: rgb(119, 107, 107);    
+  color: rgb(119, 107, 107);
   font-size: 2vh;    
   text-align:center;  
-  color: white;      
   margin-bottom: 20px;
 }
 
@@ -95,7 +95,7 @@ h1 {
   
 h2 {  
   color: #4CAF50;  
-  font-size: 6vw; 
+  font-size: 2vh; 
   font-family: Arial, Helvetica, sans-serif;
   text-align:center;
 }
@@ -110,16 +110,6 @@ a {
 p {
   color: red;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 3vw; 
-}
-
-p{
-  color: rgb(10, 39, 136);
-  font-family: monospace;
-}
-
-div class = "inhaltsbereich"{
-  background-color: 
-
+  font-size: 1.5vh; 
 }
   
