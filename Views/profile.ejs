@@ -11,5 +11,31 @@
 </head>
 <div class="rahmen">
     <div class="kopf">
-        <h1> N27- Über uns</h1>            
+        <h1> Mein Account</h1>            
     </div>
+    <div class="navigationsleiste">            
+        <a href="/">
+            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+        </a> --
+        <a href="/profile">
+            <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+        </a>   --
+        <a href="/about">
+            <i class="fa fa-info fa-2x" aria-hidden="true"></i>
+        </a>   --
+        <a href="/login"><i class="fa fa-sign-out fa-2x"></i></a>
+    </div>
+
+    <form>
+        <label for="fname">Vorname:</label><br>
+        <input type="text" id="fname" name="fname" value= <%= Vorname %> readonly><br>
+        <label for="lname">Nachname:</label><br>
+        <input type="text" id="lname" name="lname" value= <%= Nachname %> readonly> <br>
+        <label for="fname">Email:</label><br>
+        <input type="email" name="Mail" value= <%= Mail %> ><br>
+        <label for="fname">Rufnummer:</label><br>
+        <input type="tel" name="Rufnummer" value= <%= Rufnummer %> ><br>
+        <button class="login" formaction="/login">Änderung Speichern</button>
+      </form>
+    
+      </html> 

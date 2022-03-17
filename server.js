@@ -14,7 +14,7 @@ class Kunde{
         this.Kontostand
         this.Geburtsdatum
         this.Mail
-        this.Telefonnummer
+        this.Rufnummer
     }
 }
 
@@ -27,12 +27,12 @@ let kunde = new Kunde()
 // zugewiesen
 
 kunde.IdKunde = 150196
-kunde.Nachname = "Eyre"
-kunde.Vorname = "Jane"
+kunde.Nachname = "Smith"
+kunde.Vorname = "Lana"
 kunde.Geburtsdatum = "16.10.2002"
-kunde.MAil = "eyre@web.de"
+kunde.Mail = "smith@web.de"
 kunde.Kennwort= "123"
-kunde.Telefonnummer = "0177896754306"
+kunde.Rufnummer = "+49177/896754306"
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -142,7 +142,13 @@ meineApp.get('/about',(browserAnfrage, serverAntwort, next) => {
 
 
     meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {              
-        serverAntwort.render('profile.ejs', {})          
+        serverAntwort.render('profile.ejs', {
+            Vorname: kunde.Vorname,
+            Nachname: kunde.Nachname,
+            Mail: kunde.Mail,
+            Rufnummer: kunde.Rufnummer
+  
+        })          
     }) 
 
     meineApp.post('/profile',(browserAnfrage, serverAntwort, next) => {             
