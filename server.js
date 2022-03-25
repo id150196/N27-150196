@@ -146,19 +146,45 @@ meineApp.get('/about',(browserAnfrage, serverAntwort, next) => {
             Vorname: kunde.Vorname,
             Nachname: kunde.Nachname,
             Mail: kunde.Mail,
-            Rufnummer: kunde.Rufnummer
+            Rufnummer: kunde.Rufnummer,
+            Kennwort: kunde.Kennwort
   
         })          
     }) 
 
+
+    // Sobald der Speicher-Button auf der Profile-Seite gedrÜckt wird, 
+    // wird die meineApp.post('/profile'...) abgearbeitet.
+
     meineApp.post('/profile',(browserAnfrage, serverAntwort, next) => {             
-        
-    const Mail = browserAnfrage.body.Mail
-    const Telefonnummer = browserAnfrage.body.Telefonnummer
     
-    console.log("E-Mailkdes Kunden: " + Mail)
-    console.log("Telefonnummer des Kunden: " + Telefonnummer) 
-})
+    // Die im Browser eingegebenen Werte werden an den Server übermittelt 
+    //und  in Konstanten gespeichert
+
+    // Der Wert der Eigenschaft von Mail im Browser wird zugewiesen (=) 
+    // an die Eigenschaft Mail des Objekts kunde 
+
+    kunde.Mail = browserAnfrage.body.Mail
+    kunde.Rufnummer = browserAnfrage.body.Rufnummer
+    kunde.Kennwort = browserAnfrage.body.Kennwort
+    
+    
+    console.log("Profil gespeichert.")
+    
+
+        serverAntwort.render('profile.ejs', {
+            Vorname: kunde.Vorname,
+            Nachname: kunde.Nachname,
+            Mail: kunde.Mail,
+            Rufnummer: kunde.Rufnummer,
+            Kennwort: kunde.Kennwort
+  
+        })
+    })
+
+
+
+
 
   
 // require('./Uebungen/ifUndElse.js')

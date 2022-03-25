@@ -15,27 +15,29 @@
     </div>
     <div class="navigationsleiste">            
         <a href="/">
-            <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-home fa-2x" title="Home" aria-hidden="true"></i>
         </a> --
         <a href="/profile">
-            <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-user fa-2x" title="Profil" aria-hidden="true"></i>
         </a>   --
         <a href="/about">
-            <i class="fa fa-info fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-info fa-2x" title="Aboout us"aria-hidden="true"></i>
         </a>   --
-        <a href="/login"><i class="fa fa-sign-out fa-2x"></i></a>
+        <a href="/login"><i class="fa fa-sign-out fa-2x" title="Log out"></i></a>
     </div>
 
-    <form>
+    <form method="post">
         <label for="fname">Vorname:</label><br>
-        <input type="text" id="fname" name="fname" value= <%= Vorname %> readonly><br>
+        <input type="text" id="fname" name="Vorname" value= <%= Vorname %> readonly><br>
         <label for="lname">Nachname:</label><br>
-        <input type="text" id="lname" name="lname" value= <%= Nachname %> readonly> <br>
+        <input type="text" id="lname" name="Nachname" value= <%= Nachname %> readonly> <br>
         <label for="fname">Email:</label><br>
         <input type="email" name="Mail" value= <%= Mail %> ><br>
         <label for="fname">Rufnummer:</label><br>
         <input type="tel" name="Rufnummer" value= <%= Rufnummer %> ><br>
-        <button class="login" formaction="/login">Änderung Speichern</button>
+        <label for="fname">Kennwort:</label><br>
+        <input type="password" name="Kennwort" value= <%= Kennwort %> ><br>
+        <button class="login" formaction="/profile">Änderung Speichern</button>
       </form>
     
       </html> 
