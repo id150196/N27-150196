@@ -141,16 +141,16 @@ meineApp.get('/about',(browserAnfrage, serverAntwort, next) => {
 
 
 
-    meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {              
-        serverAntwort.render('profile.ejs', {
-            Vorname: kunde.Vorname,
-            Nachname: kunde.Nachname,
-            Mail: kunde.Mail,
-            Rufnummer: kunde.Rufnummer,
-            Kennwort: kunde.Kennwort
-  
-        })          
-    }) 
+meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {              
+    serverAntwort.render('profile.ejs', {
+        Vorname: kunde.Vorname,
+        Nachname: kunde.Nachname,
+        Mail: kunde.Mail,
+        Rufnummer: kunde.Rufnummer,
+        Kennwort: kunde.Kennwort,
+        Erfolgsmeldung: ""
+    })          
+}) 
 
 
     // Sobald der Speicher-Button auf der Profile-Seite gedrÜckt wird, 
@@ -158,13 +158,44 @@ meineApp.get('/about',(browserAnfrage, serverAntwort, next) => {
 
     meineApp.post('/profile',(browserAnfrage, serverAntwort, next) => {             
     
+// die Erfolgsmeldung für das Speichern der geänderten Profildaten
+// wird in eine lokale Variable namens
+// Erfolgsmeldung gespeichert
+
+        let erfolgsmeldung = ""
+
+        if(kunde.Mail != browserAnfrage.body.Mail){
+
+            // Wenn der Wert der Eigenschaft von kunde.Mail abweicht 
+            // vom Wert der Eigenschaft Mail aus dem Browser-Formular,
+            // dann wird die Erfolgsmeldung initialisiert:
+
+            erfolgsmeldung  = erfolgsmeldung + " Änderung der Mail erfolgreich. "
+            kunde.Mail = browserAnfrage.body.Mail
+            console.log (erfolgsmeldung)
+        }
+            // *+* - Verkettung. Ursprüngliche Erfolgsmeldung wird verlängert
+
+
+        if(kunde.Kennwort != browserAnfrage.body.Kennwort){
+            erfolgsmeldung  = erfolgsmeldung + " Änderung des Kennworts erfolgreich. "
+            kunde.Kennwort = browserAnfrage.body.Kennwort
+            console.log (erfolgsmeldung)
+        }
+
+        if(kunde.Rufnummer != browserAnfrage.body.Rufnummer){
+            erfolgsmeldung  = erfolgsmeldung + " Änderung der Rufnummer erfolgreich. "
+            kunde.Rufnummer = browserAnfrage.body.Rufnummer
+            console.log (erfolgsmeldung)
+        }
+
     // Die im Browser eingegebenen Werte werden an den Server übermittelt 
     //und  in Konstanten gespeichert
 
     // Der Wert der Eigenschaft von Mail im Browser wird zugewiesen (=) 
-    // an die Eigenschaft Mail des Objekts kunde 
+    // an die Eigenschaft Mail des Objekts Kunde 
 
-    kunde.Mail = browserAnfrage.body.Mail
+    
     kunde.Rufnummer = browserAnfrage.body.Rufnummer
     kunde.Kennwort = browserAnfrage.body.Kennwort
     
@@ -177,8 +208,8 @@ meineApp.get('/about',(browserAnfrage, serverAntwort, next) => {
             Nachname: kunde.Nachname,
             Mail: kunde.Mail,
             Rufnummer: kunde.Rufnummer,
-            Kennwort: kunde.Kennwort
-  
+            Kennwort: kunde.Kennwort,
+            Erfolgsmeldung: erfolgsmeldung  
         })
     })
 
