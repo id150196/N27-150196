@@ -68,7 +68,7 @@ meineApp.get('/',(browserAnfrage, serverAntwort, next) => {
         // Wenn der Kunde noch nicht eigeloggt ist, soll
         // die Loginseite an den Browser zurückgegeben werden.
         serverAntwort.render('login.ejs', {
-            meldung : ""
+            Meldung : ""
         })
     }                 
 })
@@ -110,7 +110,7 @@ meineApp.post('/login',(browserAnfrage, serverAntwort, next) => {
         // gerenderte Login-Seite an den Browser zurückgegeben.
 
         serverAntwort.render('login.ejs', {
-            meldung : "Ihre Zugangsdaten scheinen nicht zu stimmen."
+            Meldung : "Ihre Zugangsdaten scheinen nicht zu stimmen."
         })
     }
 })
@@ -127,7 +127,7 @@ meineApp.get('/login',(browserAnfrage, serverAntwort, next) => {
     serverAntwort.clearCookie('istAngemeldetAls')
 
     serverAntwort.render('login.ejs', {
-        meldung : "Bitte geben Sie die Zugangsdaten ein."
+        Meldung : "Bitte geben Sie die Zugangsdaten ein."
     })          
 })
 
