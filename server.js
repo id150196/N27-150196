@@ -135,8 +135,28 @@ meineApp.get('/login',(browserAnfrage, serverAntwort, next) => {
 // Die meineApp.post('login') wird ausgeführt, sobald der Button
 // auf dem Login-Formular gedrückt wird.
 
+// Wenn die About-Seite angesurft wird, wird die about-Seite
+// zum Browser zurückgegeben
+
 meineApp.get('/about',(browserAnfrage, serverAntwort, next) => {              
-    serverAntwort.render('about.ejs', {})          
+   
+    if(browserAnfrage.signedCookies['istAngemeldetAls']){
+
+        // Wenn der Kunde bereits angemeldet ist, soll die
+        // Index-Seite an den Browser gegeben werden.
+
+        serverAntwort.render('about.ejs',{})
+    }else{
+
+        // Wenn der Kunde noch nicht eigeloggt ist, soll
+        // die Loginseite an den Browser zurückgegeben werden.
+        serverAntwort.render('login.ejs', {
+            Meldung : ""
+        })
+    }                 
+    // Wenn der Anmelde-Cookie  gesetzt ist, wird der Nutzer zu 
+    // About-Seite gelenkt.  
+       
 })
 
 
@@ -149,7 +169,21 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
         Rufnummer: kunde.Rufnummer,
         Kennwort: kunde.Kennwort,
         Erfolgsmeldung: ""
-    })          
+    })
+    if(browserAnfrage.signedCookies['istAngemeldetAls']){
+
+        // Wenn der Kunde bereits angemeldet ist, soll die
+        // Index-Seite an den Browser gegeben werden.
+
+        serverAntwort.render('profile.ejs',{})
+    }else{
+
+        // Wenn der Kunde noch nicht eigeloggt ist, soll
+        // die Loginseite an den Browser zurückgegeben werden.
+        serverAntwort.render('login.ejs', {
+            Meldung : ""
+        })
+    }                           
 }) 
 
 
