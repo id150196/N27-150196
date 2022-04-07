@@ -18,6 +18,8 @@ class Kunde{
     }
 }
 
+
+
 // Von der Kunden-Klasse wird eine konkrete Instanz 
 // gebildet 
 
@@ -33,6 +35,22 @@ kunde.Geburtsdatum = "16.10.2002"
 kunde.Mail = "smith@web.de"
 kunde.Kennwort= "123"
 kunde.Rufnummer = "+49177/896754306"
+
+class Kundenberater{
+    constructor (){
+        this.Vorname
+        this.Nachname
+        this.Mail
+    }
+}
+
+let kundenberater = new Kundenberater ()
+
+kundenberater.Vorname = "Paul"
+kundenberater.Nachname = "Müller"
+kundenberater.Mail = "n27bank@support.de"
+kundenberater.Telefonnummer = "015789076542"
+
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -159,7 +177,23 @@ meineApp.get('/about',(browserAnfrage, serverAntwort, next) => {
        
 })
 
+meineApp.get('/support',(browserAnfrage, serverAntwort, next) => {              
+    
+    if(browserAnfrage.signedCookies['istAngemeldetAls']){
 
+        serverAntwort.render('support.ejs', {
+            Vorname: kundenberater.Vorname,
+            Nachname: kundenberater.Nachname,
+            Mail: kundenberater.Mail,
+            Rufnummer: kundenberater.Telefonnummer,
+            Erfolgsmeldung: ""
+        })
+    }else{
+        serverAntwort.render('login.ejs', {
+            Meldung : ""
+        })
+    }  
+}) 
 
 meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {              
     serverAntwort.render('profile.ejs', {
@@ -170,6 +204,7 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
         Kennwort: kunde.Kennwort,
         Erfolgsmeldung: ""
     })
+
     if(browserAnfrage.signedCookies['istAngemeldetAls']){
 
         // Wenn der Kunde bereits angemeldet ist, soll die
