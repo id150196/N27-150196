@@ -38,18 +38,27 @@ kunde.Rufnummer = "+49177/896754306"
 
 class Kundenberater{
     constructor (){
+        this.IdKundenberater
         this.Vorname
         this.Nachname
+        this.Position
         this.Mail
+        this.Rufnummer
+        this.Begruessung
     }
 }
 
+// es wird ein Kundenberater Objekt instanziiert
+
 let kundenberater = new Kundenberater ()
 
+kundenberater.IdKundenberater =150196
 kundenberater.Vorname = "Paul"
 kundenberater.Nachname = "Müller"
-kundenberater.Mail = "n27bank@support.de"
-kundenberater.Telefonnummer = "015789076542"
+kundenberater.Position =  "Chefberater"
+kundenberater.Mail = "mueller@n27bank-support.de"
+kundenberater.Rufnummer = "+49 15789076542"
+kundenberater.Begruessung = "Hallo, ich bin`s, Dein Kundenberater"
 
 
 const express = require('express')
@@ -184,9 +193,10 @@ meineApp.get('/support',(browserAnfrage, serverAntwort, next) => {
         serverAntwort.render('support.ejs', {
             Vorname: kundenberater.Vorname,
             Nachname: kundenberater.Nachname,
+            Position: kundenberater.Position,
             Mail: kundenberater.Mail,
-            Rufnummer: kundenberater.Telefonnummer,
-            Erfolgsmeldung: ""
+            Rufnummer: kundenberater.Rufnummer,
+            Begruessung: kundenberater.Begruessung
         })
     }else{
         serverAntwort.render('login.ejs', {

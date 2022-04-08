@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>N27-Startseite</title>
+    <title>N27-Support</title>
 </head>
 <body>
     
@@ -15,19 +15,24 @@
         <div class="kopf">
             <h1>N27-Support</h1>            
         </div>
+
         <div class="navigationsleiste">            
             <a href="/">
-                <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-home fa-2x" title="Home" aria-hidden="true"></i>
             </a> --
             <a href="/profile">
-                <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-user fa-2x" title="Profile" aria-hidden="true"></i>
             </a>   --
             <a href="/about">
-                <i class="fa fa-info fa-2x" aria-hidden="true"></i>
+                <i class="fa fa-info fa-2x" title="About us" aria-hidden="true"></i>
             </a>   --
-            <a href="/login"><i class="fa fa-sign-out fa-2x"></i></a>
             <a href="/support">
-            
+                <i class="fa fa-medkit fa-2x" aria-hidden="true"></i>
+            </a> --
+            <a href="/login">
+                <i class="fa fa-sign-out fa-2x"></i>
+            </a> --
+    
         </div>
         
         <div class="list-group">
@@ -39,12 +44,18 @@
 
         <div class="inhaltsbereich">
             
-            
-            <h2>Kundenberater</h2>
-            <p> Vorname: Paul</p>
-            <p> Nachname: Müller</p>
-            <p> Mail:n27bank@support.de </p>
-            <p> Telefon: 02861 90900-0</p>
+            <h2><%=Begruessung%></h2>
+            <h2>Vorname</h2>
+            <label> <%=Vorname%></label>
+            <h2> Nachname</h2>
+            <label> <%=Nachname%></label>
+            <h2>Position</h2>
+            <label> <%=Position%></label>
+            <h2> Mail</h2>
+            <label> <%=Mail%></label>
+            <h2> Telefon</h2>
+            <label> <%=Rufnummer%></lable>
+
         </div>
           
         
