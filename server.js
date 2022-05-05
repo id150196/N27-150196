@@ -61,6 +61,23 @@ kundenberater.Rufnummer = "+49 15789076542"
 kundenberater.Begruessung = "Hallo, ich bin`s, Dein Kundenberater"
 
 
+class Konto{
+    constructor(){
+        this.Kontostand
+        this.Art
+        this.IBAN
+        this.PIN
+    }
+}
+
+let konto = new Konto ()
+ konto.Kontostand = "25.000"
+konto.IBAN = "DE02100500000024290661"
+konto.Art = "Kreditkartenkonto"
+konto.PIN = "2509"
+
+
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const meineApp = express()
@@ -206,21 +223,22 @@ meineApp.get('/support',(browserAnfrage, serverAntwort, next) => {
 }) 
 
 meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {              
-    serverAntwort.render('profile.ejs', {
-        Vorname: kunde.Vorname,
-        Nachname: kunde.Nachname,
-        Mail: kunde.Mail,
-        Rufnummer: kunde.Rufnummer,
-        Kennwort: kunde.Kennwort,
-        Erfolgsmeldung: ""
-    })
+    
+    
 
     if(browserAnfrage.signedCookies['istAngemeldetAls']){
 
         // Wenn der Kunde bereits angemeldet ist, soll die
         // Index-Seite an den Browser gegeben werden.
 
-        serverAntwort.render('profile.ejs',{})
+        serverAntwort.render('profile.ejs', {
+            Vorname: kunde.Vorname,
+            Nachname: kunde.Nachname,
+            Mail: kunde.Mail,
+            Rufnummer: kunde.Rufnummer,
+            Kennwort: kunde.Kennwort,
+            Erfolgsmeldung: ""
+            })
     }else{
 
         // Wenn der Kunde noch nicht eigeloggt ist, soll
@@ -273,7 +291,6 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
 
     // Der Wert der Eigenschaft von Mail im Browser wird zugewiesen (=) 
     // an die Eigenschaft Mail des Objekts Kunde 
-
     
     kunde.Rufnummer = browserAnfrage.body.Rufnummer
     kunde.Kennwort = browserAnfrage.body.Kennwort
@@ -291,9 +308,25 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
             Erfolgsmeldung: erfolgsmeldung  
         })
     })
+    
+    meineApp.get('/KontostandAnzeigen',(browserAnfrage, serverAntwort, next) => {            
+    
+        if(browserAnfrage.signedCookies['istAngemeldetAls']){
+    
+            serverAntwort.render('KontostandAnzeigen.ejs', {
+                Kontenart: konto.Art,
+                Kontostand: konto.Kontostand,
+                IBAN: konto.IBAN,
+                PIN: konto.PIN
 
-
-
+                 
+            })
+        }else{
+            serverAntwort.render('login.ejs', {
+                Meldung : ""
+            })
+        }  
+    }) 
 
 
   
