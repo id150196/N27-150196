@@ -66,15 +66,17 @@ class Konto{
         this.Kontostand
         this.Art
         this.IBAN
-        this.PIN
+        
     }
 }
 
+// Istanzierung eines objekts namens Konto vom Typ Konto 
+
 let konto = new Konto ()
- konto.Kontostand = "25.000"
+ konto.Kontostand = 25000
 konto.IBAN = "DE02100500000024290661"
 konto.Art = "Kreditkartenkonto"
-konto.PIN = "2509"
+
 
 
 
@@ -317,8 +319,8 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
                 Kontenart: konto.Art,
                 Kontostand: konto.Kontostand,
                 IBAN: konto.IBAN,
-                PIN: konto.PIN
-
+                
+                
                  
             })
         }else{
@@ -330,5 +332,5 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
 
 
   
-// require('./Uebungen/ifUndElse.js')
-// require('./Uebungen/klasseUndObjekt.js')
+ require('./Uebungen/ifUndElse.js')
+require('./Uebungen/klasseUndObjekt.js')
