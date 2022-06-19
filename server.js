@@ -77,6 +77,27 @@ let konto = new Konto ()
 konto.IBAN = "DE02100500000024290661"
 konto.Art = "Kreditkartenkonto"
 
+class Kreditrechner{
+    constructor (){
+        this.Kreditbetrag
+        this.Zinssatz
+        this.Laufzeit
+    }
+
+
+// eine Funktion berechnet etwas. Im Namen der Funktion steht also immer ein Verb.
+//
+    berechneGesamtkostenKredit (){
+        return this.Betrag * this.Zinssatz /100 + this.Betrag 
+    }
+}
+
+let kreditrechner = new Kreditrechner
+
+kreditrechner.Kreditbetrag = 250000
+kreditrechner.Zinssatz= 1.5
+kreditrechner.Laufzeit= 5
+
 
 
 
@@ -330,8 +351,41 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
         }  
     }) 
 
+    meineApp.get('/kreditrechner',(browserAnfrage, serverAntwort, next) => {            
+    
+        if(browserAnfrage.signedCookies['istAngemeldetAls']){
+    
+            serverAntwort.render('kreditrechner.ejs', {
+                Kreditbetrag: kreditrechner.Kreditbetrag,
+                Zinssatz: kreditrechner.Zinssatz,
+                Laufzeit: kreditrechner.Laufzeit,
+            
+            })
+                 
+        }else{
+            serverAntwort.render('login.ejs', {
+                Meldung : ""
+            })
+        }  
+    }) 
 
+    meineApp.post('/kreditrechner',(browserAnfrage, serverAntwort, next) => {             
+        
+                let erfolgsmeldung = ""
+        
+                if(kreditrechner.Kreditbetrag != browserAnfrage.body.Kreditanfrage){
+        
+                    // Wenn der Wert der Eigenschaft von kunde.Mail abweicht 
+                    // vom Wert der Eigenschaft Mail aus dem Browser-Formular,
+                    // dann wird die Erfolgsmeldung initialisiert:
+        
+                    erfolgsmeldung  = erfolgsmeldung + "Ihre Kreditkosten betragen "
+                    kreditrechner.Betrag = browserAnfrage.body.Mail
+                    console.log (erfolgsmeldung)
+                }
+            })
+   
   
  //require('./Uebungen/ifUndElse.js')
  //require('./Uebungen/klasseUndObjekt.js')
- require('./Uebungen/klausur.js')
+ //require('./Uebungen/klausur.js')
