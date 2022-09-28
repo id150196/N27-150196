@@ -60,9 +60,15 @@ kundenberater.Mail = "mueller@n27bank-support.de"
 kundenberater.Rufnummer = "+49 15789076542"
 kundenberater.Begruessung = "Hallo, ich bin`s, Dein Kundenberater"
 
+// Die Klasse Konto ist der Bauplan für alle konto-Objekte.
+// in der Klasse werden alle relevanten Eigenschaften definiert 
+// Die konto-Objekte, die aus dieser Klasse erzeugt werden, haben diesselben Eigenschaften,
+// aber unterschiedliche Eigenschaftswerte  
 
 class Konto{
     constructor(){
+        // Die relevanten Eigenschaften werden im Konstruktor aufgelistet.
+        //Eigenschaften werden immer großgeschrieben 
         this.Kontostand
         this.Art
         this.IBAN
@@ -72,8 +78,20 @@ class Konto{
 
 // Istanzierung eines objekts namens Konto vom Typ Konto 
 
+// "let konto" bedeutet, dass ein Objekt namens Konto existieren soll. 
+// Man sagt, das Konto wird deklariert. 
+
+// "=new Konto" nennt man instanziirung. Bei der Instanziierung wird Festplatten-
+//speicher reserviert, um bei der anschließenden Initialisierung konkrete
+// Eigenschaftswerte für das Objekt zu speichern. 
+
 let konto = new Konto ()
- konto.Kontostand = 25000
+
+// Bei der Initialisierung werden konkrete Eigenschaftswerte in die 
+// reservierten Speicherzellen geschrieben.
+// Die Zuweisung von Eigenschaftswerten geschieht immer von rechts nach links.
+
+konto.Kontostand = 25000
 konto.IBAN = "DE02100500000024290661"
 konto.Art = "Kreditkartenkonto"
 
@@ -331,13 +349,15 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
             Erfolgsmeldung: erfolgsmeldung  
         })
     })
+    // sobald der Button KontostandAnzeigen auf der Index-Seite gedrückt wird, 
+    // wird die meineApp.get('/kontostandAnzeigen' - Funktion abgearbeitet
     
     meineApp.get('/KontostandAnzeigen',(browserAnfrage, serverAntwort, next) => {            
     
         if(browserAnfrage.signedCookies['istAngemeldetAls']){
     
             serverAntwort.render('KontostandAnzeigen.ejs', {
-                Kontenart: konto.Art,
+                Kontoart: konto.Art,
                 Kontostand: konto.Kontostand,
                 IBAN: konto.IBAN,
                 

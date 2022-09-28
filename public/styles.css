@@ -117,7 +117,7 @@ a {
   text-decoration: none;
   }
   
-p {
+p { 
   color: red;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.5vh; 
@@ -126,4 +126,15 @@ p {
 .schaltflaeche {
   color: blue;
   text-decoration: none;
+}
+
+.button {
+  background-color: #281080; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }

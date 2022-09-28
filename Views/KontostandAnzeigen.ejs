@@ -13,7 +13,7 @@
     
     <div class="rahmen">
         <div class="kopf">
-            <h1> N27- Über uns</h1>            
+            <h1> Kontostand anzeigen </h1>            
         </div>
         
         <div class="navigationsleiste">            
@@ -34,22 +34,26 @@
             </a> --
     
         </div>
-        
-        
 
         <div class="inhaltsbereich">
             <select name="Konto">
-             <option> Kreditkartenkonto</option> 
+             <option> Kreditkartenkonto</option>
                 <option>Tagesgeldkonto</option>
                 <option>Girokonto</option>
             </select>
-          
-            <h2>Kontenart</h2>
-           <label> <%=Kontenart%></label>
-            <h2>Kontostand</h2>
-            <label> <%=Kontostand%></label>
-            <h2>IBAN</h2>
-            <label> <%=IBAN%></label>
+
+        <form method="post">
+            <label for="fname">Kontoart:</label><br>
+            <input type="text" name="Kontoart" value= <%= Kontoart %> readonly><br>
+            <label for="lname">IBAN:</label><br>
+            <input type="text" name="IBAN" value= <%= IBAN %> readonly> <br>
+            <label for="fname">Kontostand:</label><br>
+            <input type="number" name="Kontostand" value= <%= Kontostand %> readonly><br>
+        
+            
+          </form>
+
+       
 
 
         </div>
