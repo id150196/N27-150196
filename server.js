@@ -1,4 +1,76 @@
-// Programme verarbeiten oft Objekte der realen Welt.
+var mysql = require('mysql');
+
+var dbVerbindung = mysql.createConnection({
+    host: '10.40.38.110',
+    user: 'placematman',
+    password: "BKB123456!",
+    database: "dbn27"
+  });
+  
+  dbVerbindung.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+  });
+
+// Die Tabelle namens kunde wird erstellt 
+// Die Spalten heißen: idKunde, vorname, nachname, ort, kennwort, mail
+// VARCHAR (45) legt den Datentyp der Spalte auf "Text" mit der Länge max. 45 Zeichen fest
+// INT (11) : begrenzt die Eingabe auf 11 Ziffern. Es sind nur Ganzzahlen möglich
+// Float/ Double: sind Gleitkommazahlen 
+// Smallint: Zahlen von 0 - 65535
+// Date/ Datetime: steht für ein Datum bzw. Uhrzeit
+// idKunde ist Primary Key. Das bedeutet, dass die idKunde den Datensatz eindeutig 
+// kennzeichnet. Das wiederum bedeutet, dass kein zweiter Kunde mit derselben idKunde angelegt
+
+  dbVerbindung.connect(function(fehler){
+    dbVerbindung.query('CREATE TABLE kunde(idKunde INT(11), vorname VARCHAR(45), nachname VARCHAR(45), ort VARCHAR(45), kennwort VARCHAR(45), mail VARCHAR(45), PRIMARY KEY(idKunde));', function (fehler) {
+    
+        if (fehler) {
+    if(fehler.code == "ER_TABLE_EXISTS_ERROR"){
+    console.log("Tabelle kunde existiert bereits und wird nicht angelegt.")
+        
+        }else{
+    console.log("Fehler: " + fehler )
+    }
+        }else{
+    console.log("Tabelle Kunde erfolgreich angelegt.")
+    }
+    })
+    })
+
+    dbVerbindung.connect(function(fehler){
+        dbVerbindung.query('CREATE TABLE kredit(idKunde INT(11), datum DATETIME, zinssatz FLOAT, laufzeit INT(11), betrag SMALLINT, PRIMARY KEY(idKunde, datum));', function (fehler) {
+        
+            if (fehler) {
+        if(fehler.code == "ER_TABLE_EXISTS_ERROR"){
+        console.log("Tabelle kredit existiert bereits und wird nicht angelegt.")
+            
+            }else{
+        console.log("Fehler: " + fehler )
+        }
+            }else{
+        console.log("Tabelle erfolgreich angelegt.")
+        }
+        })
+        })
+
+
+        dbVerbindung.connect(function(fehler){
+            dbVerbindung.query('INSERT INTO kunde(idKunde, vorname, nachname, ort, kennwort, mail) VALUES (150196, "Pit", "Kiff", "BOR", "123!", "pk@web.de"));', function (fehler) {
+            
+                if (fehler) {
+            if(fehler.code == "ER_TABLE_EXISTS_ERROR"){
+            console.log("Tabelle kunde existiert bereits und wird nicht angelegt.")
+                
+                }else{
+            console.log("Fehler: " + fehler )
+            }
+                }else{
+            console.log("Tabelle Kunde erfolgreich angelegt.")
+            }
+            })
+            })
+  // Programme verarbeiten oft Objekte der realen Welt.
 // Objekte haben Eigenschaften.
 // In unserem Bankimgprogramm interessieren uns Objekte,
 // wie z. B. Kunde, Konto, Filiale, Bankautomat,...
@@ -95,7 +167,7 @@ konto.Kontostand = 25000
 konto.IBAN = "DE02100500000024290661"
 konto.Art = "Kreditkartenkonto"
 
-class Kreditrechner{
+class KreditBerechnen{
     constructor (){
         this.Kreditbetrag
         this.Zinssatz
@@ -110,11 +182,11 @@ class Kreditrechner{
     }
 }
 
-let kreditrechner = new Kreditrechner
+let kreditBerechnen = new KreditBerechnen
 
-kreditrechner.Kreditbetrag = 250000
-kreditrechner.Zinssatz= 1.5
-kreditrechner.Laufzeit= 5
+kreditBerechnen.Kreditbetrag = 250000
+kreditBerechnen.Zinssatz= 1.5
+kreditBerechnen.Laufzeit= 5
 
 
 
@@ -371,14 +443,14 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
         }  
     }) 
 
-    meineApp.get('/kreditrechner',(browserAnfrage, serverAntwort, next) => {            
+    meineApp.get('/kreditBerechnen',(browserAnfrage, serverAntwort, next) => {            
     
         if(browserAnfrage.signedCookies['istAngemeldetAls']){
     
-            serverAntwort.render('kreditrechner.ejs', {
-                Kreditbetrag: kreditrechner.Kreditbetrag,
-                Zinssatz: kreditrechner.Zinssatz,
-                Laufzeit: kreditrechner.Laufzeit,
+            serverAntwort.render('kreditBerechnen.ejs', {
+                Kreditbetrag: kreditBerechnen.Kreditbetrag,
+                Zinssatz: kreditBerechnen.Zinssatz,
+                Laufzeit: kreditBerechnen.Laufzeit,
             
             })
                  
@@ -389,24 +461,38 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
         }  
     }) 
 
-    meineApp.post('/kreditrechner',(browserAnfrage, serverAntwort, next) => {             
+    meineApp.post('/kreditBerechnen',(browserAnfrage, serverAntwort, next) => {             
         
                 let erfolgsmeldung = ""
         
-                if(kreditrechner.Kreditbetrag != browserAnfrage.body.Kreditanfrage){
+                if(kreditBerechnen.Kreditbetrag != browserAnfrage.body.Kreditanfrage){
         
                     // Wenn der Wert der Eigenschaft von kunde.Mail abweicht 
                     // vom Wert der Eigenschaft Mail aus dem Browser-Formular,
                     // dann wird die Erfolgsmeldung initialisiert:
         
                     erfolgsmeldung  = erfolgsmeldung + "Ihre Kreditkosten betragen "
-                    kreditrechner.Betrag = browserAnfrage.body.Mail
+                    kreditBerechnen.Betrag = browserAnfrage.body.Mail
                     console.log (erfolgsmeldung)
                 }
             })
    
+            meineApp.get('/kontoAnlegen',(browserAnfrage, serverAntwort, next) => {              
+   
+                if(browserAnfrage.signedCookies['istAngemeldetAls']){
+            
+            
+                    serverAntwort.render('kontoAnlegen.ejs',{})
+                }else{
+            
+
+                    serverAntwort.render('login.ejs', {
+                        Meldung : ""
+                    })
+                }                 
+            })
   
  //require('./Uebungen/ifUndElse.js')
  //require('./Uebungen/klasseUndObjekt.js')
  //require('./Uebungen/klausur.js')
- require('./Klausuren/20221026_klausur.js')
+ require('./Klausuren/20230111_klausur.js')
