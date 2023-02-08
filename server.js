@@ -1,5 +1,7 @@
 var mysql = require('mysql');
 
+var IBAN = require('iban')
+
 var dbVerbindung = mysql.createConnection({
     host: '10.40.38.110',
     user: 'placematman',
@@ -22,21 +24,21 @@ var dbVerbindung = mysql.createConnection({
 // idKunde ist Primary Key. Das bedeutet, dass die idKunde den Datensatz eindeutig 
 // kennzeichnet. Das wiederum bedeutet, dass kein zweiter Kunde mit derselben idKunde angelegt
 
-  dbVerbindung.connect(function(fehler){
+dbVerbindung.connect(function(fehler){
     dbVerbindung.query('CREATE TABLE kunde(idKunde INT(11), vorname VARCHAR(45), nachname VARCHAR(45), ort VARCHAR(45), kennwort VARCHAR(45), mail VARCHAR(45), PRIMARY KEY(idKunde));', function (fehler) {
     
         if (fehler) {
-    if(fehler.code == "ER_TABLE_EXISTS_ERROR"){
-    console.log("Tabelle kunde existiert bereits und wird nicht angelegt.")
+            if(fehler.code == "ER_TABLE_EXISTS_ERROR"){
+            console.log("Tabelle kunde existiert bereits und wird nicht angelegt.")
         
+            }else{
+                console.log("Fehler: " + fehler )
+            }
         }else{
-    console.log("Fehler: " + fehler )
-    }
-        }else{
-    console.log("Tabelle Kunde erfolgreich angelegt.")
-    }
+            console.log("Tabelle Kunde erfolgreich angelegt.")
+        }
     })
-    })
+})
 
     dbVerbindung.connect(function(fehler){
         dbVerbindung.query('CREATE TABLE kredit(idKunde INT(11), datum DATETIME, zinssatz FLOAT, laufzeit INT(11), betrag SMALLINT, PRIMARY KEY(idKunde, datum));', function (fehler) {
@@ -53,6 +55,24 @@ var dbVerbindung = mysql.createConnection({
         }
         })
         })
+
+        // Eine Tabelle namens konto wird neu angelegt
+
+    dbVerbindung.connect(function(fehler){
+            dbVerbindung.query('CREATE TABLE konto(iban VARCHAR(45), idKunde INT(11), anfangssaldo FLOAT, kontoart VARCHAR(45), timestamp TIMESTAMP,PRIMARY KEY(iban));', function (fehler) {
+            
+                if (fehler) {
+            if(fehler.code == "ER_TABLE_EXISTS_ERROR"){
+            console.log("Tabelle kredit existiert bereits und wird nicht angelegt.")
+                
+                }else{
+            console.log("Fehler: " + fehler )
+            }
+                }else{
+            console.log("Tabelle erfolgreich angelegt.")
+            }
+            })
+            })
 
 
         dbVerbindung.connect(function(fehler){
@@ -476,21 +496,91 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
                     console.log (erfolgsmeldung)
                 }
             })
-   
-            meineApp.get('/kontoAnlegen',(browserAnfrage, serverAntwort, next) => {              
+            
+            // Die Funktion meineApp.get('/kontoAnlegen' wird abgearbeitet, 
+            // sobald die Seite KontoAnlegen aufgerufen wird
+            meineApp.get('/kontoAnlegen',(browserAnfrage, serverAntwort, next) => {  
+                
+                // Es wird geprüft ob, der User angemeldet ist, also ob der Cookie gesetzt ist           
    
                 if(browserAnfrage.signedCookies['istAngemeldetAls']){
             
-            
+                    // Wenn der User angemeldet ist, wird die kontoAnlegen-Seite gerendert...
+
                     serverAntwort.render('kontoAnlegen.ejs',{})
                 }else{
-            
+                    // Wenn der User nicht angemeldet ist, wird er zur Login-Seite zurückgeworfen
 
                     serverAntwort.render('login.ejs', {
                         Meldung : ""
                     })
                 }                 
             })
+
+           
+ // Die Funktion meineApp.post('/kontoAnlegen'... wird abgearbeitet, sobald der Button 
+ // auf der kontoAnlegen-Seite gedrückt wird und das Formular abgesendet ('gepostet')wird. 
+
+meineApp.post('/kontoAnlegen',(browserAnfrage, serverAntwort, next) => {              
+    
+    //Die im Formular eingegebne Kontoart wird an die Kostante namens kontoArt zugewiesen
+    
+    const kontoArt = browserAnfrage.body.kontoArt
+       
+    console.log("Gewählte Kontart: " + kontoArt)
+    
+    // Die IBAN wird automtisch erzeugt. Die IBAN kennzeichnet das anzulegende Konto einmalig (Primary Key).
+    
+    let laenderkennung = "DE"
+    let bankleitzahl = 27000000
+
+    // Die Zahl 111111111 wird zugewiesen an eine Variable namens min
+
+    let min = 1111111111;
+
+    // Die Zahl wird an eine Variable namens max zugewiesen 
+
+    let max = 9999999999;
+
+    // Eien Zufallszahl zwischen min und max wird von der Math-Bibliothek mit der Methode random()
+    // erzeugt und an die Variable zufaellige Kontonummer zugewiesen 
+
+    let zufaelligeKontonummer = Math.floor(Math.random() * (max - min + 1)) + min;
+    
+    console.log(zufaelligeKontonummer)
+
+    // Die IBAN wird mit einer Node-Bibliothek errechnet. Die Parameter der Funktion zur Berechnung der
+    // IBAN sind: Länderkennung, bankleitzahl und Kontonummer
+
+    let iban = IBAN.fromBBAN(laenderkennung,bankleitzahl+ " " + zufaelligeKontonummer)
+    console.log("IBAN: " + iban)
+    
+    if(IBAN.isValid(iban)){
+        console.log("Die IBAN ist gültig.")
+   
+    }else{
+   
+        console.log("Die IBAN ist ungültig.")
+    }
+    // Für die generierte IBAN muss ein neuer Datensatz in der Tabelle konto anlgelegt werden.
+    
+
+    dbVerbindung.connect(function(fehler){
+        dbVerbindung.query('INSERT INTO konto(iban, idKunde, anfangssaldo, kontoart, timestamp) VALUES ("' + iban + '", 150196, 1, "'+ kontoArt +'", NOW());', function (fehler) {
+        
+            if (fehler) {
+                if(fehler.code == "ER_TABLE_EXISTS_ERROR"){
+                console.log("Tabelle kunde existiert bereits und wird nicht angelegt.")
+                    
+                    }else{
+                console.log("Fehler: " + fehler )
+                }
+                    }else{
+                console.log("Tabelle Kunde erfolgreich angelegt.")
+            }
+        })
+    })
+})       
   
  //require('./Uebungen/ifUndElse.js')
  //require('./Uebungen/klasseUndObjekt.js')
