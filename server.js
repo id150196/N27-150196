@@ -531,8 +531,8 @@ meineApp.post('/kontoAnlegen',(browserAnfrage, serverAntwort, next) => {
     
     // Die IBAN wird automtisch erzeugt. Die IBAN kennzeichnet das anzulegende Konto einmalig (Primary Key).
     
-    let laenderkennung = "DE"
-    let bankleitzahl = 27000000
+    let laenderkennung = "DE" // Ein string mit dem inhalt de wird zugewiesen einer variable namens landerkennung
+    let bankleitzahl = 27000000 // Die Zahl... wird zugewiesen an eine variable namens Bankleitzahl
 
     // Die Zahl 111111111 wird zugewiesen an eine Variable namens min
 
@@ -547,7 +547,7 @@ meineApp.post('/kontoAnlegen',(browserAnfrage, serverAntwort, next) => {
 
     let zufaelligeKontonummer = Math.floor(Math.random() * (max - min + 1)) + min;
     
-    console.log(zufaelligeKontonummer)
+    console.log("Die zufällig generierte Kontonummer lautet: "+ zufaelligeKontonummer)
 
     // Die IBAN wird mit einer Node-Bibliothek errechnet. Die Parameter der Funktion zur Berechnung der
     // IBAN sind: Länderkennung, bankleitzahl und Kontonummer
@@ -576,10 +576,17 @@ meineApp.post('/kontoAnlegen',(browserAnfrage, serverAntwort, next) => {
                 console.log("Fehler: " + fehler )
                 }
                     }else{
-                console.log("Tabelle Kunde erfolgreich angelegt.")
+                console.log("Neues Konto in der Tabelle konto angelegt.")
             }
-        })
+        }) 
+                serverAntwort.render('kontoAnlegen.ejs', {
+                
+                Erfolgsmeldung: "Das"+ kontoArt + "mit der IBAN"+ iban + "wurde erfolgreich angelegt."
     })
+
+      
+    }) 
+               
 })       
   
  //require('./Uebungen/ifUndElse.js')
