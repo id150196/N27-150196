@@ -56,6 +56,18 @@ input {
   cursor: pointer;
   font-size: 3vh;  
 }
+
+select {  
+  width: 80%;
+  margin-bottom: 10px;
+  margin-right: 10%;
+  margin-left: 10%;  
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 2.5vh;
+}
     
 label {
   width: 80%;
@@ -132,9 +144,11 @@ p {
   background-color: #281080; 
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 12px 28px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  border-radius: 12px;
+  margin: 0px auto;
 }

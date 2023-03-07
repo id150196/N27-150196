@@ -42,16 +42,21 @@
                 <option>Girokonto</option>
             </select>
 
-        <form method="post">
-            <label for="fname">Kontoart:</label><br>
-            <input type="text" name="Kontoart" value= <%= Kontoart %> readonly><br>
-            <label for="lname">IBAN:</label><br>
-            <input type="text" name="IBAN" value= <%= IBAN %> readonly> <br>
-            <label for="fname">Kontostand:</label><br>
-            <input type="number" name="Kontostand" value= <%= Kontostand %> readonly><br>
+            <form method="post">
+                <select name="kontoArt" id="kontoArt">
+                    <option value="Girokonto">Girokonto</option>
+                    <option value="Sparkonto">Sparkonto</option>
+                    
+                </select>
+
+                <label for="fname">Kontoart:</label><br>
+                <input type="text" name="Kontoart" value= <%= Kontoart %> readonly><br>
+                <label for="lname">IBAN:</label><br>
+                <input type="text" name="IBAN" value= <%= IBAN %> readonly> <br>
+                <label for="fname">Kontostand:</label><br>
+                <input type="number" name="Kontostand" value= <%= Kontostand %> readonly><br>
         
-            
-          </form>
+            </form>
 
        
 

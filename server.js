@@ -3,14 +3,27 @@ var mysql = require('mysql');
 var IBAN = require('iban')
 
 var dbVerbindung = mysql.createConnection({
+
+    // Der host ist der Server auf dem die Datenbank installiert ist
+    // Der host kann über seinen Namen oder die IP-Adresse adressiert werden 
+    // Wenn der Host nicht reagiert, kann mit ping "10.40.38.110" geprüft werden, 
+    // ob der Rechner eingeschaltet ist. 
+    // Wenn der Rechner auf ping antwortet, aber kein connect aufgebaut werden kann,
+    // dann muss geprüft werden, ob der Datenbank-Dienst auf dem Rechner läuft.
+    // Dazu melden wir uns auf dem Datenbanksserver an und starten die MySQL-Workbench
     host: '10.40.38.110',
     user: 'placematman',
     password: "BKB123456!",
     database: "dbn27"
   });
   
+  //Die Verbindung ruft die connect-Methode auf, um eine Verbindung mit der 
+  // Datenbank herzustellen
   dbVerbindung.connect(function(err) {
     if (err) throw err;
+    // Wenn die Verbindung scheitert, wird ein Fehler geworfen.
+    // Wenn die Datenbank nicht innerhalb einer definieten Zeit auf 
+    // denn connect-Versuch antwortet, kommt ein TIMEOUT-Fehler 
     console.log("Connected!");
   });
 
@@ -51,7 +64,7 @@ dbVerbindung.connect(function(fehler){
         console.log("Fehler: " + fehler )
         }
             }else{
-        console.log("Tabelle erfolgreich angelegt.")
+        console.log("Tabelle Kredit erfolgreich angelegt.")
         }
         })
         })
@@ -63,7 +76,7 @@ dbVerbindung.connect(function(fehler){
             
                 if (fehler) {
             if(fehler.code == "ER_TABLE_EXISTS_ERROR"){
-            console.log("Tabelle kredit existiert bereits und wird nicht angelegt.")
+            console.log("Tabelle konto existiert bereits und wird nicht angelegt.")
                 
                 }else{
             console.log("Fehler: " + fehler )
@@ -76,14 +89,14 @@ dbVerbindung.connect(function(fehler){
 
 
         dbVerbindung.connect(function(fehler){
-            dbVerbindung.query('INSERT INTO kunde(idKunde, vorname, nachname, ort, kennwort, mail) VALUES (150196, "Pit", "Kiff", "BOR", "123!", "pk@web.de"));', function (fehler) {
+            dbVerbindung.query('INSERT INTO kunde(idKunde, vorname, nachname, ort, kennwort, mail) VALUES (150196, "Pit", "Kiff", "BOR", "123!", "pk@web.de");', function (fehler) {
             
                 if (fehler) {
             if(fehler.code == "ER_TABLE_EXISTS_ERROR"){
             console.log("Tabelle kunde existiert bereits und wird nicht angelegt.")
                 
                 }else{
-            console.log("Fehler: " + fehler )
+            console.log("Fehler beim Eintragen in die Kundentabelle: " + fehler )
             }
                 }else{
             console.log("Tabelle Kunde erfolgreich angelegt.")
@@ -275,6 +288,11 @@ meineApp.post('/login',(browserAnfrage, serverAntwort, next) => {
         serverAntwort.cookie('istAngemeldetAls',JSON.stringify(kunde),{signed:true})
         console.log("Der Cookie wurde erfolgreich gesetzt.")
 
+        // Nach dem der Kunde erfolgreich eingeloggt ist, werden seine Konten aus der Datenbank eingelesen 
+
+
+        console.log("Jetzt werden die Konten eingelesen")
+
         // Wenn die Id des Kunden mit der Eingabe im Browser übereinstimmt
         // UND ("&&") das Kennwort ebenfalls übereinstimmt,
         // dann gibt der Server die gerenderte Index-Seite zurück.
@@ -447,21 +465,35 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
     meineApp.get('/KontostandAnzeigen',(browserAnfrage, serverAntwort, next) => {            
     
         if(browserAnfrage.signedCookies['istAngemeldetAls']){
+
+        // In MySQL werden Abfragen gegen die Datenbank wie folgt formuliert:
+        // Der Abfragebefehl beginnt mit SELECT
+        // Anschließend wird die interessierende Spalte angegeben
+        // Wenn alle Spalten ausgewählt werden sollen, kann vereinfachend * angegeben werden
+        // Beispiele: SELECT iban, anfangssaldo FROM... ' oder 'SELECT * FROM 
+        // Mit FROM wird die Tabelle angegeben, aus der der Result eingelesen werden soll.
+        // mit WHERE wird der Result zeilenweise aus der Tabelle gefiltert
+        dbVerbindung.query('SELECT iban FROM konto WHERE idkunde = 150196;', function (fehler, result) {
+            
+            console.log(result)
+            // Die Index-Seite wird in den Browser gegeben und gerendert 
     
             serverAntwort.render('KontostandAnzeigen.ejs', {
+                MeineIbans: result,
                 Kontoart: konto.Art,
                 Kontostand: konto.Kontostand,
                 IBAN: konto.IBAN,
-                
-                
-                 
-            })
-        }else{
+
+            }) 
+                    
+        })
+    }else{
             serverAntwort.render('login.ejs', {
                 Meldung : ""
             })
         }  
     }) 
+
 
     meineApp.get('/kreditBerechnen',(browserAnfrage, serverAntwort, next) => {            
     
@@ -483,39 +515,42 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
 
     meineApp.post('/kreditBerechnen',(browserAnfrage, serverAntwort, next) => {             
         
-                let erfolgsmeldung = ""
+        let erfolgsmeldung = ""
+
+        if(kreditBerechnen.Kreditbetrag != browserAnfrage.body.Kreditanfrage){
+
+            // Wenn der Wert der Eigenschaft von kunde.Mail abweicht 
+            // vom Wert der Eigenschaft Mail aus dem Browser-Formular,
+            // dann wird die Erfolgsmeldung initialisiert:
+
+            erfolgsmeldung  = erfolgsmeldung + "Ihre Kreditkosten betragen "
+            kreditBerechnen.Betrag = browserAnfrage.body.Mail
+            console.log (erfolgsmeldung)
+        }
+    })
+            
+    // Die Funktion meineApp.get('/kontoAnlegen' wird abgearbeitet, 
+    // sobald die Seite KontoAnlegen aufgerufen wird
+    meineApp.get('/kontoAnlegen',(browserAnfrage, serverAntwort, next) => {  
         
-                if(kreditBerechnen.Kreditbetrag != browserAnfrage.body.Kreditanfrage){
-        
-                    // Wenn der Wert der Eigenschaft von kunde.Mail abweicht 
-                    // vom Wert der Eigenschaft Mail aus dem Browser-Formular,
-                    // dann wird die Erfolgsmeldung initialisiert:
-        
-                    erfolgsmeldung  = erfolgsmeldung + "Ihre Kreditkosten betragen "
-                    kreditBerechnen.Betrag = browserAnfrage.body.Mail
-                    console.log (erfolgsmeldung)
-                }
+        // Es wird geprüft ob, der User angemeldet ist, also ob der Cookie gesetzt ist           
+
+        if(browserAnfrage.signedCookies['istAngemeldetAls']){
+    
+            // Wenn der User angemeldet ist, wird die kontoAnlegen-Seite gerendert...
+            // Nach dem Erstellen des Kontos wird die Serverantwort gerendet an den Browser zurückgegeben
+            serverAntwort.render('kontoAnlegen.ejs',{
+                Erfolgsmeldung: ""
             })
             
-            // Die Funktion meineApp.get('/kontoAnlegen' wird abgearbeitet, 
-            // sobald die Seite KontoAnlegen aufgerufen wird
-            meineApp.get('/kontoAnlegen',(browserAnfrage, serverAntwort, next) => {  
-                
-                // Es wird geprüft ob, der User angemeldet ist, also ob der Cookie gesetzt ist           
-   
-                if(browserAnfrage.signedCookies['istAngemeldetAls']){
-            
-                    // Wenn der User angemeldet ist, wird die kontoAnlegen-Seite gerendert...
+        }else{
+            // Wenn der User nicht angemeldet ist, wird er zur Login-Seite zurückgeworfen
 
-                    serverAntwort.render('kontoAnlegen.ejs',{})
-                }else{
-                    // Wenn der User nicht angemeldet ist, wird er zur Login-Seite zurückgeworfen
-
-                    serverAntwort.render('login.ejs', {
-                        Meldung : ""
-                    })
-                }                 
+            serverAntwort.render('login.ejs', {
+                Meldung : ""
             })
+        }                 
+    })
 
            
  // Die Funktion meineApp.post('/kontoAnlegen'... wird abgearbeitet, sobald der Button 
@@ -523,6 +558,7 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
 
 meineApp.post('/kontoAnlegen',(browserAnfrage, serverAntwort, next) => {              
     
+    let erfolgsmeldung = ""
     //Die im Formular eingegebne Kontoart wird an die Kostante namens kontoArt zugewiesen
     
     const kontoArt = browserAnfrage.body.kontoArt
@@ -569,27 +605,25 @@ meineApp.post('/kontoAnlegen',(browserAnfrage, serverAntwort, next) => {
         dbVerbindung.query('INSERT INTO konto(iban, idKunde, anfangssaldo, kontoart, timestamp) VALUES ("' + iban + '", 150196, 1, "'+ kontoArt +'", NOW());', function (fehler) {
         
             if (fehler) {
-                if(fehler.code == "ER_TABLE_EXISTS_ERROR"){
-                console.log("Tabelle kunde existiert bereits und wird nicht angelegt.")
-                    
-                    }else{
-                console.log("Fehler: " + fehler )
-                }
-                    }else{
+               
+             console.log("Fehler: " + fehler )
+                
+            }else{
                 console.log("Neues Konto in der Tabelle konto angelegt.")
             }
-        }) 
-                serverAntwort.render('kontoAnlegen.ejs', {
-                
-                Erfolgsmeldung: "Das"+ kontoArt + "mit der IBAN"+ iban + "wurde erfolgreich angelegt."
-    })
+        })
 
-      
-    }) 
+    serverAntwort.render('kontoAnlegen.ejs', {
+                
+            Erfolgsmeldung: "Das"+ kontoArt + "mit der IBAN"+ iban + "wurde erfolgreich angelegt."
+        })
+
+      }) 
                
-})       
+})   
+  
   
  //require('./Uebungen/ifUndElse.js')
  //require('./Uebungen/klasseUndObjekt.js')
  //require('./Uebungen/klausur.js')
- require('./Klausuren/20230111_klausur.js')
+ //require('./Klausuren/20230111_klausur.js')
