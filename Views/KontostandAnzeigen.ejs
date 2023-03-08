@@ -36,29 +36,30 @@
         </div>
 
         <div class="inhaltsbereich">
-            <select name="Konto">
-             <option> Kreditkartenkonto</option>
-                <option>Tagesgeldkonto</option>
-                <option>Girokonto</option>
-            </select>
-
+           
             <form method="post">
                 <select name="kontoArt" id="kontoArt">
-                    <option value="Girokonto">Girokonto</option>
-                    <option value="Sparkonto">Sparkonto</option>
+                    <!-- Die Vorschleife sorgt dafür, dass Dropdown-Menü alle Konten 
+                    zur Auswahl einzeigt. Bei 5 Konten wird die Schleife fünf mal durchlaufen.
+                    MeineIbans ist die Liste, die beim rendern an den Browser übergeben wird
+                    Die Eigenschaft length gibt die Anzahl der Elemente in der Liste zuruck
+                    Mit eckigen Klammern hinter MeineIbans kann ein einzelnes Element der Liste ausgewählt werden.
+                    Mit .iban wird die Eigenschaft Iban ausgelesen -->
+                    <% for (var i=0; i < MeineIbans.length;i++ ){ %>
+                        <option value= "<%= MeineIbans[i].iban %>"> <%= MeineIbans[i].iban %> </option>
+                    <% } %>
+                    
                     
                 </select>
 
                 <label for="fname">Kontoart:</label><br>
-                <input type="text" name="Kontoart" value= <%= Kontoart %> readonly><br>
-                <label for="lname">IBAN:</label><br>
-                <input type="text" name="IBAN" value= <%= IBAN %> readonly> <br>
+                <input type="text" name="Kontoart" value= <%= MeineIbans[0].kontoart %> readonly><br>
                 <label for="fname">Kontostand:</label><br>
-                <input type="number" name="Kontostand" value= <%= Kontostand %> readonly><br>
+                <input type="number" name="Kontostand" value= <%= MeineIbans[0].anfangssaldo %> readonly><br>
         
             </form>
 
-       
+                
 
 
         </div>

@@ -473,16 +473,13 @@ meineApp.get('/profile',(browserAnfrage, serverAntwort, next) => {
         // Beispiele: SELECT iban, anfangssaldo FROM... ' oder 'SELECT * FROM 
         // Mit FROM wird die Tabelle angegeben, aus der der Result eingelesen werden soll.
         // mit WHERE wird der Result zeilenweise aus der Tabelle gefiltert
-        dbVerbindung.query('SELECT iban FROM konto WHERE idkunde = 150196;', function (fehler, result) {
+        dbVerbindung.query('SELECT * FROM konto WHERE idkunde = 150196;', function (fehler, result) {
             
             console.log(result)
             // Die Index-Seite wird in den Browser gegeben und gerendert 
     
             serverAntwort.render('KontostandAnzeigen.ejs', {
-                MeineIbans: result,
-                Kontoart: konto.Art,
-                Kontostand: konto.Kontostand,
-                IBAN: konto.IBAN,
+                MeineIbans: result
 
             }) 
                     
