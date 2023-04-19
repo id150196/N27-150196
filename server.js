@@ -11,7 +11,9 @@ var dbVerbindung = mysql.createConnection({
     // Wenn der Rechner auf ping antwortet, aber kein connect aufgebaut werden kann,
     // dann muss geprüft werden, ob der Datenbank-Dienst auf dem Rechner läuft.
     // Dazu melden wir uns auf dem Datenbanksserver an und starten die MySQL-Workbench
+    
     host: '10.40.38.110',
+    //host: '130.255.124.99',
     user: 'placematman',
     password: "BKB123456!",
     database: "dbn27"

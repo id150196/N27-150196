@@ -39,9 +39,16 @@
 
         <div class="inhaltsbereich">
             
-            <p> <a class="schaltflaeche" href="/ueberweisungTätigen">
-                <button class="button"> Überweisung tätigen </button>
-             </a> </p>
+            <form method="post">
+                <label for="betrag">Betrag:</label><br>
+                <input type="number" name="Betrag"><br>
+                <input type="number" name="Betrag"><br>
+                <label>Empfänger-IBAN:</label><br>
+                <input type="text" name="empfaengerIban"><br>
+            
+                <button class="login" formaction="/ueberweisungTaetigen">Überweisung tätigen</button>
+            </form>
+            <p class="erfolg"> <%= Erfolgsmeldung %></p>
         </div>
           
         
